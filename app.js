@@ -39,7 +39,7 @@ app.post('/',function(req, res){
     controller.login(req_mem_id,req_mem_pw,function(result){
         console.log(result);
         if(result==0){
-            res.redirect('/');
+            res.send('<script>alert("로그인실패");location.href="/";</script>');
         }
         else{
         res.redirect('/main');        
