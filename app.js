@@ -85,8 +85,8 @@ app.get('/idcheck/:id',function(req,res){
     var id = req.params.id;
     console.log(req.params);
     controller.idcheck(id,function(error,result){
-        
-        if(result.length!=0){
+        console.log(result);
+        if(result!=0){
             res.send(false);
             //중복
         }
