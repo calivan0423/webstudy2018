@@ -1,10 +1,11 @@
 var mysql      = require('mysql');
 var db = mysql.createConnection({
-    host     : 'calivan.ctk1nynf5quj.us-east-2.rds.amazonaws.com',
-    user     : 'calivan',
+    host     : '127.0.0.1',
+    user     : 'root',
     password : 'youngjun423!',
     database : 'calivan'
   });
+//modul.exports = client;
 
   exports.login=function(id,pw,callback){
       db.query('SELECT * FROM calivan.users_table where user_id=? AND user_password =?',[id,pw],function(error,result,fields){
