@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script>
+	var app = angular.module("myApp", []);
+
+	app.controller("getuserprofile", function($scope, $http){
+		$scope.user = res.data.memlist[0].mem_id;
+	});
+</script>
+</head>
+<body>
+	<div ng-controller="login">
+		<p>{{user}}</p>
+	</div>
+</body>
+</html>
+

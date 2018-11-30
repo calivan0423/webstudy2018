@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> 회원 가입 화면</title>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>  -->
+        <script src="../controller/logincontroller.js"></script>
+        <script type="text/javascript">
+            var overlap_id = 'false';
+                function checkspecial(str){
+                var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi; 
+                if(special_pattern.test(str)) {
+                    return true; 
+                    } 
+                if(str.length<5){
+                    return true;
+                }
+                if(!document.userinfo.id.value){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            
+            function checkPassword(password){
+                    var check = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}$/;
+                    if (!check.test(password))     {
+                        alert('비밀번호를 확인하세요.(영문+숫자+특수문자,6~16자리)');
+                        return true;
+                    }
+                    return false;
+            }
+    
+
+
+           function checkValue(e){
+               // e.preventDefault();
+                /*
+                if(!document.userinfo.id.value){
+                    alert("아이디를 입력하세요.");
+                    //document.getElementById(id).focus();
+                    return false;
+                }
+                */
+                if(checkspecial(document.userinfo.id.value)){
+                    alert("아이디를 확인하세요. (5글자 이상,특수문자 금지,영문만 사용)");
+                    //document.getElementById(id).focus();
+                    return false;
+                }                
+                if(checkPassword(document.userinfo.password.value)){
+                    //document.getElementById(password).focus();
+                    return false;
+                }
+                if((!document.userinfo.passwordcheck.value)||(document.userinfo.password.value!=document.userinfo.passwordcheck.value)){
+                    alert("비밀번호를 재확인 다시 입력하세요.");
+                    //document.getElementById(password).focus();
+                    return false;
+                }
+                if(!document.userinfo.nickname.value){
+                    alert("닉네임를 입력하세요.");
+                   // inputForm.nickname.focus();
+                    return false;
+                }
+                if(!document.userinfo.email.value){
+                    alert("이메일를 입력하세요.");
+                  //  inputForm.email.focus();
+                    return false;
+                }
+                if(overlap_id=='false'){
+                    alert("아이디중복체크를 해주세요.")
+                    return false;
+                }
+            
+                
+                
+
+            }
+            /*
+            function idcheck(){
+                controller.check(document.getElementById.id.value,function(req,res){
+                    if(res.value==1){
+                        ("사용중인 아이디입니다.");
+                    inputForm.id.focus();
+                    return false;
+                    }
+                })
+                
+            }
+            */
+            function goLoginForm(){
+                location.href="http://13.58.230.106:3000/"    
+            }
+            
+            function idcheck(){
+                var id = document.getElementById("id").value;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange=function(){
+                    if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                        overlap_id = xmlHttp.response;
+                        if(overlap_id=='true'){
+                            document.getElementById("idcheck").innerHTML= "사용할 수 있는 아이디입니다." ;
+                        }
+                        else{
+                        document.getElementById("idcheck").innerHTML = "중복된 아이디입니다.";
+                        }//callback(xmlHttp.response);
+                    }
+                }
+                xmlHttp.open( "GET", '/idcheck/'+id, true ); // false for synchronous request
+                xmlHttp.send( null );
+            
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <b>회원가입</b>
+            <br><br>
+            <form name="userinfo" action="" method="post" onsubmit="return checkValue(event)">
+                <table>
+                    <tr>
+                        <td>아이디</td>
+                        <td>
+                            <input type="text" id="id" name="id" maxlength="15">
+                            <input type="button" value="중복확인" onclick="idcheck()">
+                            <span id = "idcheck"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="password">비밀번호</td>
+                        <td>
+                            <input type="password" name="password" maxlength="45">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="passwordcheck">비밀번호 확인</td>
+                        <td>
+                            <input type="password" name="passwordcheck" maxlength="50">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="nickname">닉네임</td>
+                        <td>
+                            <input type="text" name="nickname" maxlength="20">
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td id="email">이메일</td>
+                        <td> 
+                            <input type="text" name="email" > 
+                        </td>                           
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="가입">
+                <input type="button" value="취소"  onclick="goLoginForm()">
+            </form>
+        </div>
+    </body>
+</html>
+

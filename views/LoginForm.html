@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script type="text/javascript">
+        function goJoinForm(){
+            location.href="http://13.58.230.106:3000/JoinForm";
+        }
+        function checkValue(){
+            inputForm= eval("document.logininfo");
+            if(!inputForm.id.value){
+                alert("아이디를 입력하세요.");
+                //inputForm.id.focus();
+                return false;
+            }
+            if(!inputForm.password.value){
+                alert("비밀번호를 입력하세요.");
+                //inputForm.password.focus();
+                return false;
+                
+            }
+            
+        }
+        
+        
+
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <form name="logininfo" action="/" method="post" onsubmit="return checkValue()">
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <td> 아이디</td>
+                        <td><input type="id" name="id" maxlength="15"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" name="password" maxlength="45"></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="로그인">
+                <input type="button" value="회원가입" onclick="goJoinForm()">
+            </form>
+        </div>
+    </body>
+</html>
