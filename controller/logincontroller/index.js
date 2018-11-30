@@ -45,7 +45,7 @@ exports.join = function(id,pw,nick,email,callback){
             //가입실패
         }else{
             callback("1");
-            //가입성공
+            //
         }
         
     });

@@ -38,7 +38,12 @@ app.post('/',function(req, res){
     
     controller.login(req_mem_id,req_mem_pw,function(result){
         console.log(result);
+        if(result==0){
+            res.redirect('/');
+        }
+        else{
         res.redirect('/main');        
+        }
         /*
         res.json({
             result
