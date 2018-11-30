@@ -15,7 +15,7 @@ var db = mysql.createConnection({
         callback(error,result);
       });
     }
-      
+      //에이비씨
 
 //실험중
 
