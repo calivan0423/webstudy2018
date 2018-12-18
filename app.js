@@ -38,11 +38,12 @@ app.post('/',function(req, res){
     
     controller.login(req_mem_id,req_mem_pw,function(result){
         console.log(result);
-        if(result==0){
-            res.send('<script>alert("로그인실패");location.href="/";</script>');
+        
+        if(result=='1'){
+        res.send('<script>alert("로그인 성공");location.href="/main"</script>');        
         }
         else{
-        res.redirect('/main');        
+            res.send('<script>alert("로그인실패");location.href="/";</script>');
         }
         /*
         res.json({
