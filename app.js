@@ -36,8 +36,13 @@ app.post('/',function(req, res){
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
     
+    console.log("11a");
+      console.log(112);
+
     controller.login(req_mem_id,req_mem_pw,function(result){
         console.log(result);
+        console.log("11b");
+        console.log(113);
         
         if(result=='1'){
         res.send('<script>alert("로그인 성공");location.href="/main"</script>');        
