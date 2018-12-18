@@ -10,6 +10,7 @@ var db = mysql.createConnection({
   exports.login=function(id,pw,callback){
       db.query('SELECT * FROM calivan.users_table where user_id=? AND user_password =?',[id,pw],function(error,result,fields){
         //console.log(result);
+        console.log("11");
         if(result!=0){
             db.query('UPDATE users_table SET user_recent_date = NOW() WHERE user_id= ?',[id]);
         }
