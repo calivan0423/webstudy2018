@@ -8,6 +8,7 @@ var db = mysql.createConnection({
 //modul.exports = client;
 
   exports.login=function(id,pw,callback){
+      console.log("11");
       db.query('SELECT * FROM calivan.users_table where user_id=? AND user_password =?',[id,pw],function(error,result,fields){
         //console.log(result);
         if(result!=0){
