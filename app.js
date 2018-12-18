@@ -86,13 +86,9 @@ app.post('/JoinForm',function(req, res){
 app.get('/idcheck/:id',function(req,res){
     var id = req.params.id;
     console.log(req.params);
-    console.log("11");
-      console.log(11);
     controller.idcheck(id,function(error,result){
         console.log(result);
-        console.log("112");
-      console.log(112);
-        if(result!=0){
+        if(result!='0'){
             res.send(false);
             //중복
         }
