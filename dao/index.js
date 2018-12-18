@@ -1,6 +1,6 @@
 var mysql      = require('mysql');
 var db = mysql.createConnection({
-    host     : '127.0.0.1',
+    host     : 'localhost',
     port     : '3306',
     user     : 'root',
     password : 'youngjun423!',
@@ -22,7 +22,9 @@ var db = mysql.createConnection({
 //실험중
 
   exports.idcheck=function(id,callback){
-      db.query('SELECT * FROM calivan.users_table where user_id =?',[id],callback);
+     console.log("11");
+      db.query('SELECT * FROM calivan.users_table where user_id = ?',[id],callback);
+    
   }
 
   
