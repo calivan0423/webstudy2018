@@ -76,5 +76,7 @@ exports.getUserProfile = function(req,res){
 
 //실험 중
 exports.idcheck= function(id,callback){
+    console.log("11");
+    console.log(11);
     dao.idcheck(id,callback);
 };
