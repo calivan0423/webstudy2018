@@ -9,6 +9,8 @@ var server = app.listen(3000, function(){
 var session=require('express-session');
 var bcrypt = require('bcrypt-nodejs');
 
+app.use(cookieParser());
+
 var bodyParser = require('body-parser'); 
 //bodyparser(-->post request를 처리)을 사용하기 위해서
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,6 +31,9 @@ app.use(session({
 
 
 app.get('/', function(req, res){
+    if(req.cookies){
+        console.log(req.cookies);
+    }
     if(req.session.username){
         res.redirect('/main')
     }
@@ -61,7 +66,11 @@ app.post('/',function(req, res){
         controller.login(body.id,body.password,function(result){
 
             if(result=='1'){
-                req.session.username=body.id; 
+                req.session.username=body.id;
+                res.cookie("user",body.id,{
+                    expires: new Date(Date.now()+900000),
+                    httpOnly: true
+                });
             res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
             }
             else{
