@@ -37,12 +37,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/main',function(req,res){
-    if(req.session.username){
-        res.redirect('/main')
-    }
-    else{
-    res.render('./LoginForm.html');
-    }
+    res.render('./main.html');
 })
 
 app.get('/getUserInfo', (req, res) => {
