@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
+	/*
 	var app = angular.module("myApp", []);
 
 	app.controller("getuserprofile", function($scope, $http){
 		$scope.user = res.data.memlist[0].mem_id;
 	});
+	*/
+	//var dao = require('./dao/index');
 </script>
 </head>
 <body>
+	<!--
 	<div ng-controller="login">
 		<p>{{user}}</p>
 	</div>
+		-->
+	<table>
+
+		<?php
+
+		$mysql_host='calivan.ctk1nynf5quj.us-east-2.rds.amazonaws.com';
+		$mysql_user='calivan';
+		$mysql_password='youngjun423!';
+		$mysql_db='calivan';
+		//연결설정
+		$conn=mysql_connect($mysql_host,$mysql_user,$mysql_password);
+		//db연결
+		$abconn=mysql_select_db($mysql_db,$conn);
+		mysql_query("set names utf8");
+		$query = "select *from calivan";
+		$result=mysql_fetch_array($result){
+			echo "MySQL에서 가져온 데이터는 아래와 같습니다.<br/>";
+    			while($row = mysql_fetch_array($result)){
+					echo "id: ".$row[user_id]."/ 닉네임 : $row[] "
+				
+				}
+		}
+
+
+
+	</table>
 </body>
 </html>
 

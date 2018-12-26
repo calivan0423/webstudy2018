@@ -25,9 +25,11 @@ app.get('/main',function(req,res){
 })
 
 app.get('/getUserInfo', (req, res) => {
-    dao.getuser((err, rows)=> {
+    /*dao.getuser((err, rows)=> {
         res.send(rows);
     });
+    */
+   res.render('./user.html');
 });
 
 
@@ -88,7 +90,7 @@ app.get('/idcheck/:id',function(req,res){
     console.log(req.params);
     controller.idcheck(id,function(error,result){
         console.log(result);
-        if(result!=0){
+        if(result!='0'){
             res.send(false);
             //중복
         }
