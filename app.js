@@ -50,27 +50,31 @@ app.post('/',function(req, res){
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
     */
-   var body= req.body;
-    controller.login(body.id,body.password,function(result){
-        console.log(result);
+   if(session.username){
+       res.render("/");
+   }
+   else{
+    var body= req.body;
+        controller.login(body.id,body.password,function(result){
+            console.log(result);
+            
         
-        if(session.username){
-            console.log(123);
-        }
-        else if(result=='1'){
-            var sess=req.session;
-            sess.username=body.id; 
-        res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
-        }
-        else{
-            res.send('<script>alert("로그인실패");location.href="/";</script>');
-        }
-        /*
-        res.json({
-            result
-        })
-        */  
-    });
+            if(result=='1'){
+                var sess=req.session;
+                sess.username=body.id; 
+            res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
+            }
+            else{
+                res.send('<script>alert("로그인실패");location.href="/";</script>');
+            }
+            /*
+            res.json({
+                result
+            })
+            */ 
+        
+        });
+    }
 });
 
 app.get('/logout',function(req,res){
