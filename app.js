@@ -87,7 +87,6 @@ app.get('/JoinForm',function(req,res){
 });
 
 
-
 app.post('/JoinForm',function(req, res){
     var req_id = req.body.id;
     var req_pw= req.body.password;
@@ -108,6 +107,27 @@ app.post('/JoinForm',function(req, res){
         }
     });
 }); 
+
+app.get('/main',function(req,res){
+    console.log('call logout');
+    if(req.session.username){
+        console.log("logout");
+        req.session.destroy(
+            function(error){
+                if(error){
+                    console.log('에러 발생');
+                    return ;
+                }
+                console.log('삭제성공');
+                res.redirect('/');
+            }
+        );
+    }
+    else{
+        console.log('로긴안되어있음');
+        res.redirect('/');
+    }
+});
 
 
 app.get('/idcheck/:id',function(req,res){
