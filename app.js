@@ -32,7 +32,14 @@ app.get('/', function(req, res){
 });
 
 app.get('/main',function(req,res){
-    res.render('./main.html');
+   // res.render('./main.html');
+   var sess= req.session;
+   res.render('index',{
+       title :"my home",
+       length:5,
+       name:sess.name,
+       username: sess.username
+   })
 })
 
 app.get('/getUserInfo', (req, res) => {
@@ -56,7 +63,7 @@ app.post('/',function(req, res){
         
         if(result=='1'){
             var sess=req.session;
-            sess.user_id=body.id; 
+            sess.username=body.id; 
         res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
         }
         else{
