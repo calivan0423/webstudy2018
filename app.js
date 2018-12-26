@@ -54,7 +54,10 @@ app.post('/',function(req, res){
     controller.login(body.id,body.password,function(result){
         console.log(result);
         
-        if(result=='1'){
+        if(!session){
+            return ;
+        }
+        else if(result=='1'){
             var sess=req.session;
             sess.user_id=body.id; 
         res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
