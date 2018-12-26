@@ -103,7 +103,7 @@ app.get('/idcheck/:id',function(req,res){
     })
 })
 
-app.use(cookieParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
