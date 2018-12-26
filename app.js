@@ -33,14 +33,14 @@ app.use(session({
 
 
 
-
+/*
 app.get('/', function(req, res){
     if(!req.session.user_id)
-        res.redirect('./LoginForm');
+        res.re('./LoginForm');
     else
         res.redirect('/main');
 });
-/*
+
 app.get('/main',function(req,res){
     res.render('./main.html');
 })
@@ -52,13 +52,14 @@ app.get('/getUserInfo', (req, res) => {
     
    //res.render('./user.html');
 });
+/*
 app.get('/LoginForm',function(req,res){
     if(!req.session.user_id)
         res.render('/LoginForm.html');
     else
         res.render('/main.html');
 });
-
+*/
 app.get('/logout',function(req,res){
     req.session.destroy(function(err){
         res.redirect('/');
