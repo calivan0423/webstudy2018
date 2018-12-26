@@ -6,6 +6,8 @@ var dao = require('./dao/index')
 var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000");
 });
+var session=require('express-session');
+
 var bodyParser = require('body-parser'); 
 //bodyparser(-->post request를 처리)을 사용하기 위해서
 app.use(bodyParser.urlencoded({extended: true}));
@@ -16,14 +18,33 @@ app.set('views engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 
-app.get('/', function(req, res){
-    res.render('./LoginForm.html');
-});
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret : "secret key",
+    //비밀키를 지정
+    resave : false,
+    saveUninitialized : true,
+    cookie:{
+        maxAge: 60*1000
+    }
+}));
 
+
+
+
+app.get('/', function(req, res){
+    if(!req.session.user_id)
+        res.redirect('./LoginForm.html');
+    else
+        res.redirect('/main.html');
+});
+/*
 app.get('/main',function(req,res){
     res.render('./main.html');
 })
-
+*/
 app.get('/getUserInfo', (req, res) => {
     dao.getuser((err, rows)=> {
         res.send(rows);
@@ -31,20 +52,33 @@ app.get('/getUserInfo', (req, res) => {
     
    //res.render('./user.html');
 });
+app.get('/LoginForm',function(req,res){
+    if(!req.session.user_id)
+        res.render('./LoginForm.html',{message:'input your id'});
+    else
+        res.redirect('/main.html');
+});
 
+app.get('/logout',function(req,res){
+    req.session.destroy(function(err){
+        res.redirect('/');
+    });
+});
 
-app.post('/',function(req, res){
+app.post('/LoginForm',function(req, res){
 	
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
-    
     
     controller.login(req_mem_id,req_mem_pw,function(result){
         console.log(result);
         
         if(result=='1'){
-        res.send('<script>alert("로그인 성공");location.href="/main"</script>');        
-        }
+            req.session.user_id=user_id;
+            req.session.save(function(){
+                return res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
+            }
+        )}
         else{
             res.send('<script>alert("로그인실패");location.href="/";</script>');
         }
@@ -52,8 +86,7 @@ app.post('/',function(req, res){
         res.json({
             result
         })
-        */
-        
+        */  
     });
 });
 
@@ -101,3 +134,6 @@ app.get('/idcheck/:id',function(req,res){
         
     })
 })
+
+
+

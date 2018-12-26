@@ -11,7 +11,7 @@
 		$scope.user = res.data.memlist[0].mem_id;
 	});
 	*/
-	//var dao = require('./dao/index');
+	var dao = require('./dao/index');
 </script>
 </head>
 <body>
@@ -32,15 +32,9 @@
 		$conn=mysql_connect($mysql_host,$mysql_user,$mysql_password);
 		//db연결
 		$abconn=mysql_select_db($mysql_db,$conn);
-		mysql_query("set names utf8");
-		$query = "select *from calivan";
-		$result=mysql_fetch_array($result){
-			echo "MySQL에서 가져온 데이터는 아래와 같습니다.<br/>";
-    			while($row = mysql_fetch_array($result)){
-					echo "id: ".$row[user_id]."/ 닉네임 : $row[] "
-				
-				}
-		}
+		$result = mysql_query($);
+		$query = "";
+		
 
 
 
