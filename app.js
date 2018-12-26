@@ -54,8 +54,8 @@ app.post('/',function(req, res){
     controller.login(body.id,body.password,function(result){
         console.log(result);
         
-        if(!session.username){
-            return ;
+        if(session.username){
+            console.log(123);
         }
         else if(result=='1'){
             var sess=req.session;
