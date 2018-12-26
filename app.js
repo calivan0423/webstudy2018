@@ -28,7 +28,12 @@ app.use(session({
 
 
 app.get('/', function(req, res){
+    if(req.session.username){
+        res.redirect('/main')
+    }
+    else{
     res.render('./LoginForm.html');
+    }
 });
 
 app.get('/main',function(req,res){
@@ -50,15 +55,10 @@ app.post('/',function(req, res){
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
     */
-   if(req.session){
-       res.render("/main");
-   }
-   else{
+   
     var body= req.body;
         controller.login(body.id,body.password,function(result){
-            console.log(result);
-            
-        
+
             if(result=='1'){
                 req.session.username=body.id; 
             res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
@@ -73,7 +73,6 @@ app.post('/',function(req, res){
             */ 
         
         });
-    }
 });
 
 app.get('/logout',function(req,res){
