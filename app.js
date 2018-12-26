@@ -60,8 +60,7 @@ app.post('/',function(req, res){
             
         
             if(result=='1'){
-                var sess=req.session;
-                sess.username=body.id; 
+                req.session.username=body.id; 
             res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
             }
             else{
