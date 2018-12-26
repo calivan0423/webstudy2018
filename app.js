@@ -18,33 +18,14 @@ app.set('views engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
-    secret : "secret key",
-    //비밀키를 지정
-    resave : false,
-    saveUninitialized : true,
-    cookie:{
-        maxAge: 60*1000
-    }
-}));
-
-
-
-/*
 app.get('/', function(req, res){
-    if(!req.session.user_id)
-        res.re('./LoginForm');
-    else
-        res.redirect('/main');
+    res.render('./LoginForm.html');
 });
 
 app.get('/main',function(req,res){
     res.render('./main.html');
 })
-*/
+
 app.get('/getUserInfo', (req, res) => {
     dao.getuser((err, rows)=> {
         res.send(rows);
@@ -52,19 +33,7 @@ app.get('/getUserInfo', (req, res) => {
     
    //res.render('./user.html');
 });
-/*
-app.get('/LoginForm',function(req,res){
-    if(!req.session.user_id)
-        res.render('/LoginForm.html');
-    else
-        res.render('/main.html');
-});
-*/
-app.get('/logout',function(req,res){
-    req.session.destroy(function(err){
-        res.redirect('/');
-    });
-});
+
 
 app.post('/',function(req, res){
 	
@@ -75,11 +44,9 @@ app.post('/',function(req, res){
         console.log(result);
         
         if(result=='1'){
-            req.session.user_id=user_id;
-            req.session.save(function(){
-                return res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
-            }
-        )}
+        req.session.user_id=user_id; 
+        res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
+        }
         else{
             res.send('<script>alert("로그인실패");location.href="/";</script>');
         }
@@ -136,5 +103,16 @@ app.get('/idcheck/:id',function(req,res){
     })
 })
 
-
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret : "secret key",
+    //비밀키를 지정
+    resave : false,
+    saveUninitialized : true,
+    cookie:{
+        maxAge: 60*1000
+    }
+}));
 
