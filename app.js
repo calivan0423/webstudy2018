@@ -33,7 +33,7 @@ app.use(session({
 
 app.get('/', function(req, res){
     if(req.cookies){
-        console.log(req.cookies);
+        console.log('쿠키는'+req.cookies+'입니다');
     }
     if(req.session.username){
         res.redirect('/main')
