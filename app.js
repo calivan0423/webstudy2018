@@ -13,11 +13,11 @@ var bodyParser = require('body-parser');
 //bodyparser(-->post request를 처리)을 사용하기 위해서
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-/*
+
 app.set('views', __dirname + '/views');
 app.set('views engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-*/
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret : "secret key",
