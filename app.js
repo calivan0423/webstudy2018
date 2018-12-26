@@ -15,10 +15,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.set('views', __dirname + '/views');
-/*
+
 app.set('views engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-*/
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret : "secret key",
