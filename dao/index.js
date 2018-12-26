@@ -21,7 +21,6 @@ var db = mysql.createConnection({
 //실험중
 
   exports.idcheck=function(id,callback){
-    console.log(123);
       db.query('SELECT * FROM calivan.users_table where user_id = ?',[id],callback);
     
   }

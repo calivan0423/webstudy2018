@@ -91,12 +91,10 @@ app.get('/idcheck/:id',function(req,res){
     controller.idcheck(id,function(error,result){
         console.log(result);
         if(result!=0){
-            console.log(result);
             res.send(false);
             //중복
         }
         else {
-            console.log(result);
             res.send(true);
             //중복안된 것
         }
