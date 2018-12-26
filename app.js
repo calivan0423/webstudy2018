@@ -25,11 +25,11 @@ app.get('/main',function(req,res){
 })
 
 app.get('/getUserInfo', (req, res) => {
-    /*dao.getuser((err, rows)=> {
+    dao.getuser((err, rows)=> {
         res.send(rows);
     });
-    */
-   res.render('./user.html');
+    
+   //res.render('./user.html');
 });
 
 
