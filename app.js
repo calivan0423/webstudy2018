@@ -50,7 +50,7 @@ app.post('/',function(req, res){
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
     */
-   if(req.session.username){
+   if(req.session){
        res.render("/");
    }
    else{
