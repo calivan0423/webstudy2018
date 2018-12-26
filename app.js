@@ -36,9 +36,9 @@ app.use(session({
 
 app.get('/', function(req, res){
     if(!req.session.user_id)
-        res.redirect('./LoginForm.html');
+        res.redirect('./LoginForm');
     else
-        res.redirect('/main.html');
+        res.redirect('/main');
 });
 /*
 app.get('/main',function(req,res){
@@ -54,9 +54,9 @@ app.get('/getUserInfo', (req, res) => {
 });
 app.get('/LoginForm',function(req,res){
     if(!req.session.user_id)
-        res.render('./LoginForm.html',{message:'input your id'});
+        res.render('/LoginForm',{message:'input your id'});
     else
-        res.redirect('/main.html');
+        res.redirect('/main');
 });
 
 app.get('/logout',function(req,res){
