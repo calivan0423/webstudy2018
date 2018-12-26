@@ -44,7 +44,7 @@ app.post('/',function(req, res){
         console.log(result);
         
         if(result=='1'){
-        req.session.user_id=user_id; 
+        //req.session.user_id=user_id; 
         res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
         }
         else{
