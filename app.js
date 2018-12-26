@@ -51,7 +51,7 @@ app.post('/',function(req, res){
     var req_mem_pw = req.body.password;
     */
    if(req.session){
-       res.render("/");
+       res.render("/main");
    }
    else{
     var body= req.body;
