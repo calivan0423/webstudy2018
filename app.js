@@ -8,6 +8,7 @@ var server = app.listen(3000, function(){
 });
 var session=require('express-session');
 var bcrypt = require('bcrypt-nodejs');
+var cookieParser = require('cookie-parser')
 
 app.use(cookieParser());
 
