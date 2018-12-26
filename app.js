@@ -7,6 +7,7 @@ var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000");
 });
 var session=require('express-session');
+var bcrypt = require('bcrypt-nodejs');
 
 var bodyParser = require('body-parser'); 
 //bodyparser(-->post request를 처리)을 사용하기 위해서
@@ -16,6 +17,14 @@ app.use(bodyParser.json());
 app.set('views', __dirname + '/views');
 app.set('views engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret : "secret key",
+    //비밀키를 지정
+    resave : false,
+    saveUninitialized : true,
+}));
 
 
 app.get('/', function(req, res){
@@ -36,15 +45,18 @@ app.get('/getUserInfo', (req, res) => {
 
 
 app.post('/',function(req, res){
-	
+    
+    /*
     var req_mem_id = req.body.id;
     var req_mem_pw = req.body.password;
-    
-    controller.login(req_mem_id,req_mem_pw,function(result){
+    */
+   var body= req.body;
+    controller.login(body.id,body.password,function(result){
         console.log(result);
         
         if(result=='1'){
-        //req.session.user_id=user_id; 
+            var sess=req.session;
+            sess.user_id=user_id; 
         res.send('<script>alert("로그인 성공");location.href="/main"</script>');           
         }
         else{
@@ -57,6 +69,11 @@ app.post('/',function(req, res){
         */  
     });
 });
+
+app.get('/logout',function(req,res){
+    delete req.session.user_id;
+    res.redirect('/');
+})
 
 app.get('/JoinForm',function(req,res){
     res.render('./JoinForm.html');
@@ -104,15 +121,5 @@ app.get('/idcheck/:id',function(req,res){
 })
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
-    secret : "secret key",
-    //비밀키를 지정
-    resave : false,
-    saveUninitialized : true,
-    cookie:{
-        maxAge: 60*1000
-    }
-}));
+
 
