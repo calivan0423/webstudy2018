@@ -108,7 +108,7 @@ app.post('/JoinForm',function(req, res){
     });
 }); 
 
-app.get('/main',function(req,res){
+app.post('/main',function(req,res){
     console.log('call logout');
     if(req.session.username){
         console.log("logout");
