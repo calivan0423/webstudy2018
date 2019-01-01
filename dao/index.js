@@ -1,4 +1,5 @@
 var mysql      = require('mysql');
+
 var db = mysql.createConnection({
     host     : 'calivan.ctk1nynf5quj.us-east-2.rds.amazonaws.com',
     user     : 'calivan',
